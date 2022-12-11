@@ -78,6 +78,15 @@ local opts = {
   nowait = true, -- use `nowait` when creating keymaps
 }
 
+local opts_latex = {
+  mode = "n", -- NORMAL mode
+  prefix = "<localleader>",
+  buffer = nil, -- Global mappings. Specify a buffer number for buffer local mappings
+  silent = true, -- use `silent` when creating keymaps
+  noremap = true, -- use `noremap` when creating keymaps
+  nowait = true, -- use `nowait` when creating keymaps
+}
+
 local mappings = {
   ["a"] = { "<cmd>Alpha<cr>", "Alpha" },
   ["b"] = {
@@ -183,5 +192,18 @@ local mappings = {
   },
 }
 
+local mappings_latex = {
+  l = {
+    name = "vimtex",
+    l= { "cmd<plug>(vimtex-compile)<cr>", "compile" },
+    i= { "cmd<plug>(vimtex-info)<cr>", "infomation" },
+    T= { "cmd<plug>(vimtex-toc-toggle)<cr>", "toc" },
+  },
+}
+
 which_key.setup(setup)
 which_key.register(mappings, opts)
+which_key.register(mappings_latex, opts_latex)
+which_key.register({
+["gl"] = { "<cmd>lua vim.diagnostic.open_float()<CR>", "diagnostic" },
+})
