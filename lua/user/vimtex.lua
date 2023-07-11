@@ -21,6 +21,13 @@ let g:vimtex_delim_toggle_mod_list = [
       \ ['\Biggl', '\Biggr'],
       \]
 
+"使vimtex默认xelatex为编译器
+
+" let g:vimtex_compiler_latexmk_engines = {'_':'-xelatex'}
+let g:vimtex_compiler_latexmk_engines = {'_':'-pdflatex'}
+
+"
+" let g:vimtex_compiler_latexrun_engines ={'_':'xelatex'}
 
 
 

@@ -1,5 +1,5 @@
 " Set Editor Font
 if exists(':GuiFont')
     " Use GuiFont! to ignore font errors
-    GuiFont Hack NFM:h15
+    GuiFont Hack NFM:h14
 endif

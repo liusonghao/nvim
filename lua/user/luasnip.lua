@@ -25,7 +25,7 @@ ls.config.set_config({
 
 --source path  
 require("luasnip.loaders.from_lua").load({paths = "./luasnips"})
-require("luasnip/loaders/from_vscode").load({paths = "./luasnips/friendly-snippets"})
+-- require("luasnip/loaders/from_vscode").load({paths = "./luasnips/friendly-snippets"})
 
 vim.cmd([[
 imap <silent><expr> <Tab> luasnip#expand_or_jumpable() ? '<Plug>luasnip-expand-or-jump' : '<Tab>' 
@@ -34,3 +34,5 @@ snoremap <silent> <Tab> <cmd>lua require('luasnip').jump(1)<Cr>
 snoremap <silent> <S-Tab> <cmd>lua require('luasnip').jump(-1)<Cr>
 ]]
 )
+
+vim.keymap.set('n', '<F11>', '<Cmd>lua require("luasnip.loaders.from_lua").load({paths = "./luasnips"})<CR>')

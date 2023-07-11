@@ -55,7 +55,7 @@ end
 -- table of greek symbols 
 griss = {
     alpha = "alpha", beta = "beta", delta = "delta", gam = "gamma", eps = "epsilon",
-    mu = "mu", lmbd = "lambda", sig = "sigma"
+    mu = "mu", lmbd = "lambda", sig = "sigma", eta ="eta"
 }
 
 -- brackets
@@ -359,14 +359,7 @@ return {
     { delimiters='<>' }
     )),
     -- environments
-    s({trig="beg", name="begin env", dscr="begin/end environment"},
-    fmt([[
-    \begin{<>}
-    <>
-    \end{<>}]],
-    { i(1), i(0), rep(1) },
-    { delimiters="<>" }
-    )),
+    
     s({ trig='-i', name='itemize', dscr='bullet points (itemize)'},
     fmt([[ 
     \begin{itemize}
@@ -476,11 +469,11 @@ return {
     s({trig="--", hidden=true}, {t('\\item')},
     { condition=bp, show_condition=bp }),
     -- math mode
-    s({ trig='mk', name='math', dscr='inline math'},
-    fmt([[$<>$<>]],
-    { i(1), i(0) },
-    { delimiters='<>' }
-    )),
+    -- s({ trig='mk', name='math', dscr='inline math'},
+    -- fmt([[$<>$<>]],
+    -- { i(1), i(0) },
+    -- { delimiters='<>' }
+    -- )),
     s({ trig='dm', name='math', dscr='display math'},
     fmt([[ 
     \[ 
@@ -508,13 +501,13 @@ return {
     { i(1, "*"), i(2), rep(1), i(0) },
     { delimiters='<>' }
     )),
-    s({ trig='tt', name='text', dscr='text in math'},
-    fmt([[
-    \text{<>}<>
-    ]],
-    { i(1), i(0) },
-    { delimiters='<>' }
-    ), { condition=math, show_condition=math }),
+    -- s({ trig='tt', name='text', dscr='text in math'},
+    -- fmt([[
+    -- \text{<>}<>
+    -- ]],
+    -- { i(1), i(0) },
+    -- { delimiters='<>' }
+    -- ), { condition=math, show_condition=math }),
     -- operators, symbols
     s({trig='**', priority=100}, {t('\\cdot')},
     { condition=math }),
@@ -557,13 +550,7 @@ return {
     f(function(_, snip) return snip.captures[2] end)},
     { delimiters='<>' }),
     { condition=math }),
-    s({ trig='__', name='subscript iii', dscr='auto subscript for brackets'},
-    fmt([[ 
-    _{<>}<>
-    ]],
-    { i(1), i(0) },
-    { delimiters='<>' }
-    ),{ condition=math, show_condition=math }),
+    
     s('xnn', {t('x_n')},
     { condition=math }),
     s('xii', {t('x_i')},
@@ -586,11 +573,7 @@ return {
     { condition=math }),
     s({trig="inv", wordTrig=false}, {t('^{-1}')},
     { condition=math }),
-    s({ trig='td', name='superscript', dscr='superscript', wordTrig=false},
-    fmt([[^{<>}<>]],
-    { i(1), i(0) },
-    { delimiters='<>' }
-    ), { condition=math }),
+    
     s({ trig='sq', name='square root', dscr='square root'},
     fmt([[\sqrt{<>}]],
     { i(1) },
@@ -598,11 +581,11 @@ return {
     ), { condition=math }),
     -- hats and bars (postfixes) 
     postfix("bar", {l("\\bar{" .. l.POSTFIX_MATCH .. "}")}, { condition=math }),
-    postfix("hat", {l("\\hat{" .. l.POSTFIX_MATCH .. "}")}, { condition=math }),
+    -- postfix("hat", {l("\\hat{" .. l.POSTFIX_MATCH .. "}")}, { condition=math }),
     postfix(",.", {l("\\vec{" .. l.POSTFIX_MATCH .. "}")}, { condition=math }),
     postfix("vr", {l("$" .. l.POSTFIX_MATCH .. "$")}),
-    postfix("mbb", {l("\\mathbb{" .. l.POSTFIX_MATCH .. "}")}, { condition=math }),
-    postfix("bf", {l("\\mathbf{" .. l.POSTFIX_MATCH .. "}")}, { condition=math }),
+    -- postfix("mbb", {l("\\mathbb{" .. l.POSTFIX_MATCH .. "}")}, { condition=math }),
+    --[[ postfix("bf", {l("\\mathbf{" .. l.POSTFIX_MATCH .. "}")}, { condition=math }), ]]
     postfix("vc", {l("\\mintinline{text}{" .. l.POSTFIX_MATCH .. "}")}),
     -- etc
     s({ trig='([clvd])%.', regTrig=true, name='dots', dscr='generate some dots'},
@@ -619,7 +602,7 @@ return {
     { condition=math }),
     -- a living nightmare worth of greek symbols
     -- TODO: replace with regex
-    s({ trig='(alpha|beta|delta)', regTrig=true,
+    s({ trig='(alpha|beta|delta|eta)', regTrig=true,
     name='griss symbol', dscr='greek letters hi'},
     fmt([[\<>]],
     { f(function(_, snip)
@@ -628,9 +611,17 @@ return {
     { delimiters='<>' }),
     { condition=math }),
     s("alpha", {t("\\alpha")},
-    {condition = math}),
+      {condition = math}),
+    s("eta", {t("\\eta")},
+      {condition = math}),
+    s("chi", {t("\\chi")},
+      {condition = math}),
+    s("psi", {t("\\psi")},
+      {condition = math}),
+    s("xi", {t("\\xi")},
+      {condition = math}),
     s('beta', {t('\\beta')},
-    { condition=math }),
+      { condition=math }),
     s('delta', {t('\\delta')},
     { condition=math }),
     s('gam', {t('\\gamma')},
@@ -705,8 +696,8 @@ return {
     s('iff', {t('\\iff')},
     { condition=math, show_condition=math }),
     -- utils
-    s('||', {t('\\mid')},
-    { condition=math }),
+    -- s('||', {t('\\mid')},
+    -- { condition=math }),
     s('lb', {t('\\\\')},
     { condition=math }),
     s('tcbl', {t('\\tcbline')},
