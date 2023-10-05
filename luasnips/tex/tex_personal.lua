@@ -177,22 +177,22 @@ return {
 		{ condition = line_begin } -- set condition in the `opts` table
 	),
 
-	-- s(
-	-- 	{ trig = "eqa", dscr = "equation aligned environmennt" },
-	-- 	fmta(
-	-- 		[[
- --    \begin{equation}
- --       \label{eq:<>}
- --      \begin{aligned}
- --      <>
- --      \end{aligned}
- --    \end{equation}
- --    <>
- --    ]],
-	-- 		{ i(1, "label"), i(2, "equation"), i(0) }
-	-- 	),
-	-- 	{ condition = line_begin } -- set condition in the `opts` table
-	-- ),
+	s(
+		{ trig = "eqa", dscr = "equation aligned environmennt" },
+		fmta(
+			[[
+    \begin{equation}
+       \label{eq:<>}
+      \begin{aligned}
+      <>
+      \end{aligned}
+    \end{equation}
+    <>
+    ]],
+			{ i(1, "label"), i(2, "equation"), i(0) }
+		),
+		{ condition = line_begin } -- set condition in the `opts` table
+	),
 
 	s(
 		{ trig = "new", dscr = "A generic new environmennt" },
@@ -301,6 +301,19 @@ return {
 
 	s(
 		{ trig = "(\\?[%w]+)(hat)", regTrig = true, wordTrig = false, snippetType = "autosnippet" },
+		fmta([[\<>{<>}<>]], {
+			f(function(_, snip)
+				return snip.captures[2]
+			end),
+			f(function(_, snip)
+				return snip.captures[1]
+			end),
+			i(1),
+		}),
+		{ condition = math }
+	),
+s(
+		{ trig = "(\\?[%w]+)(bar)", regTrig = true, wordTrig = false, snippetType = "autosnippet" },
 		fmta([[\<>{<>}<>]], {
 			f(function(_, snip)
 				return snip.captures[2]
@@ -459,7 +472,7 @@ s(
 	),
 
 s(
-		{ trig = "eqa", dscr = "equation aligned environmennt" },
+		{ trig = "eqr", dscr = "equation aligned environmennt" },
 		fmta(
 			[[
     \begin{equation}
@@ -475,8 +488,21 @@ s(
 		{ condition = line_begin } -- set condition in the `opts` table
 	),
 
+s(
+		{ trig = "sq", dscr = "square root", snippetType = "autosnippet" },
+		fmta([[\sqrt{<>}]], {
+			d(1, get_visual),
+		}),
+		{ condition = math }
+	),
 
-
+s(
+		{ trig = "II", dscr = "indicator", snippetType = "autosnippet" },
+		fmta([[I_{\{ <> \}}]], {
+			d(1, get_visual),
+		}),
+		{ condition = math }
+	),
 
 s({ trig=' td', name='superscript', dscr='superscript', wordTrig=false, snippetType = 'autosnippet'},
     fmt([[^{<>}<>]],

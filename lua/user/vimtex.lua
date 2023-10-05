@@ -43,5 +43,12 @@ let g:vimtex_compiler_latexmk_engines = {'_':'-pdflatex'}
        let g:vimtex_view_general_viewer = 'SumatraPDF.exe'
      endif
    endif
+nmap <F12> \lv
+imap <F12> <ESC>\lv
+imap <C-x> <C-x><C-o><C-j>
+
 
 ]])
+
+
+

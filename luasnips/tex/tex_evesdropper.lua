@@ -574,13 +574,9 @@ return {
     s({trig="inv", wordTrig=false}, {t('^{-1}')},
     { condition=math }),
     
-    s({ trig='sq', name='square root', dscr='square root'},
-    fmt([[\sqrt{<>}]],
-    { i(1) },
-    { delimiters='<>' }
-    ), { condition=math }),
+    
     -- hats and bars (postfixes) 
-    postfix("bar", {l("\\bar{" .. l.POSTFIX_MATCH .. "}")}, { condition=math }),
+    --[[ postfix("bar", {l("\\bar{" .. l.POSTFIX_MATCH .. "}")}, { condition=math }), ]]
     -- postfix("hat", {l("\\hat{" .. l.POSTFIX_MATCH .. "}")}, { condition=math }),
     postfix(",.", {l("\\vec{" .. l.POSTFIX_MATCH .. "}")}, { condition=math }),
     postfix("vr", {l("$" .. l.POSTFIX_MATCH .. "$")}),
@@ -636,6 +632,8 @@ return {
     { condition=math, show_condition=math }),
     s('sig', {t('\\sigma')},
     { condition=math, show_condition=math }),
+    s('Delta', {t('\\Delta')},
+    { condition=math, show_condition=math }),
     -- stuff i need for m110
     s({ trig='set', name='set', dscr='set'},
     fmt([[\{<>\}<>]],
@@ -646,8 +644,8 @@ return {
     { condition=math }),
     s('cq', {t('\\subseteq')},
     { condition=math }),
-    s('\\\\\\', {t('\\setminus')},
-    { condition=math }),
+    -- s('\\\\\\', {t('\\setminus')},
+    -- { condition=math }),
     s('Nn', {t('\\cap')},
     { condition=math }),
     s('UU', {t('\\cup')},
